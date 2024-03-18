@@ -25,3 +25,8 @@
 .actionButtons button {
   margin: 0 10px;
 }
+
+.btn {
+  float: left;
+  margin: 10px 0;
+}
