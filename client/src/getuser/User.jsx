@@ -1,11 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./user.css";
+import { Link } from "react-router-dom";
+import axios from "axios";
 const User = () => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/users");
+        setUsers(response.data);
+      } catch (error) {
+        console.log("Error while fetching data", error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <div className="userTable">
-      <button type="button" className="btn btn-primary">
+      <Link to={"/add"} type="button" className="btn btn-primary">
         Add User
-      </button>
+      </Link>
 
       <table className="table table-bordered">
         <thead>
@@ -18,13 +34,17 @@ const User = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>Arjun</td>
-            <td>arjun@gmail.com</td>
-            <td>Canada</td>
-            <td>Buttons</td>
-          </tr>
+          {users.map((user, index) => {
+            return (
+              <tr key={user._id}>
+                <td>{index + 1}</td>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.address}</td>
+                <td>Buttons</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>
