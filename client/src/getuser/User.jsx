@@ -41,7 +41,15 @@ const User = () => {
                 <td>{user.name}</td>
                 <td>{user.email}</td>
                 <td>{user.address}</td>
-                <td>Buttons</td>
+                <td className="actionButtons">
+                  <button type="button" className="btn btn-info">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+
+                  <button type="button" className="btn btn-danger">
+                    <i className="fa-solid fa-trash"></i>
+                  </button>
+                </td>
               </tr>
             );
           })}
