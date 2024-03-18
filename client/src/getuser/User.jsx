@@ -20,7 +20,7 @@ const User = () => {
   return (
     <div className="userTable">
       <Link to={"/add"} type="button" className="btn btn-primary">
-        Add User
+        Add User <i className="fa-solid fa-user-plus"></i>
       </Link>
 
       <table className="table table-bordered">
@@ -43,7 +43,7 @@ const User = () => {
                 <td>{user.address}</td>
                 <td className="actionButtons">
                   <button type="button" className="btn btn-info">
-                    <i class="fa-solid fa-pen-to-square"></i>
+                    <i className="fa-solid fa-pen-to-square"></i>
                   </button>
 
                   <button type="button" className="btn btn-danger">
