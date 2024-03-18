@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./add.css";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const Add = () => {
   // Initial state for the user form
@@ -25,7 +26,7 @@ const Add = () => {
     await axios
       .post("http://localhost:8000/api/user", user)
       .then((response) => {
-        console.log(response.data.message);
+        toast.success(response.data.message, { position: "top-right" });
         navigate("/");
       })
       .catch((error) => {
@@ -75,7 +76,7 @@ const Add = () => {
           />
         </div>
         <div className="inputGroup">
-          <button type="submit" class="btn btn-primary mt-4 p-2">
+          <button type="submit" className="btn btn-primary mt-4 p-2">
             Submit
           </button>
         </div>

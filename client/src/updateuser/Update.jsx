@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./update.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const Update = () => {
   // Initial state for the user form
@@ -38,7 +39,8 @@ const Update = () => {
     await axios
       .put(`http://localhost:8000/api/update/user/${id}`, user)
       .then((response) => {
-        console.log(response.data.message);
+        // console.log(response.data.message);
+        toast.success(response.data.message, { position: "top-right" });
         navigate("/");
       })
       .catch((error) => {
@@ -91,7 +93,7 @@ const Update = () => {
           />
         </div>
         <div className="inputGroup">
-          <button type="submit" class="btn btn-primary mt-4 p-2">
+          <button type="submit" className="btn btn-primary mt-4 p-2">
             Submit
           </button>
         </div>
