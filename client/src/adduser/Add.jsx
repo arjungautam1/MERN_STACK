@@ -1,8 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import "./add.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Add = () => {
+  // Initial state for the user form
+  const users = {
+    name: "",
+    email: "",
+    address: "",
+  };
+
+  // state to manage user form data
+  const [user, setUser] = useState(users);
+  const navigate = useNavigate();
+
+  const inputHandler = (e) => {
+    const { name, value } = e.target;
+    setUser({ ...user, [name]: value });
+  };
+
+  const submitForm = async (e) => {
+    e.preventDefault();
+    await axios
+      .post("http://localhost:8000/api/user", user)
+      .then((response) => {
+        console.log(response.data.message);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div className="addUser">
       <Link to="/" type="button" className="btn btn-secondary">
@@ -10,11 +40,12 @@ const Add = () => {
       </Link>
 
       <h3>Add New User</h3>
-      <form className="addUserForm">
+      <form className="addUserForm" onSubmit={submitForm}>
         <div className="inputGroup">
           <label htmlFor="name">Name:</label>
           <input
             type="text"
+            onChange={inputHandler}
             id="name"
             name="name"
             autoComplete="off"
@@ -25,6 +56,7 @@ const Add = () => {
           <label htmlFor="email">Email:</label>
           <input
             type="email"
+            onChange={inputHandler}
             id="email"
             name="email"
             autoComplete="off"
@@ -35,6 +67,7 @@ const Add = () => {
           <label htmlFor="address">Address:</label>
           <input
             type="text"
+            onChange={inputHandler}
             id="address"
             name="address"
             autoComplete="off"
@@ -42,7 +75,7 @@ const Add = () => {
           />
         </div>
         <div className="inputGroup">
-          <button type="button" class="btn btn-primary mt-4 p-2">
+          <button type="submit" class="btn btn-primary mt-4 p-2">
             Submit
           </button>
         </div>
