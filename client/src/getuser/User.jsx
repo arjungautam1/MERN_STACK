@@ -39,7 +39,7 @@ const User = () => {
       {users.length === 0 ? (
         <div className="noData">
           <h3>No Data To Display</h3>
-          <p>Please Add User.</p>
+          <p>Please Add New User.</p>
         </div>
       ) : (
         <table className="table table-bordered">
